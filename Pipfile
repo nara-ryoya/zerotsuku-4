@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 numpy = "*"
 matplotlib = "*"
+common = {editable = true, path = "."}
 
 [dev-packages]
 mypy = "*"

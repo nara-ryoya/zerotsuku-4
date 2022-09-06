@@ -1,7 +1,8 @@
 from typing import Generator, Optional, Tuple
-from .gridworld_render import Renderer
 
 import numpy as np
+
+from .gridworld_render import Renderer
 
 
 class GridWorld:
@@ -14,7 +15,7 @@ class GridWorld:
             3: "RIGHT",
         }
         self.reward_map: np.ndarray = np.array(
-            [0, 0, 0, 1], [0, None, 0, -1], [0, 0, 0, 0]
+            [[0, 0, 0, 1], [0, None, 0, -1], [0, 0, 0, 0]]
         )
         self.goal_state = (0, 3)
         self.wall_state = (1, 1)
@@ -73,6 +74,10 @@ class GridWorld:
         return self.agent_state
 
     def render_v(self, v=None, policy=None, print_value=True):
+        renderer = Renderer(self.reward_map, self.goal_state, self.wall_state)
+        renderer.render_v(v, policy, print_value)
+
+    def render_q(self, q=None, print_value=True):
         renderer = Renderer(self.reward_map, self.goal_state,
                                           self.wall_state)
-        renderer.render_v(v, policy, print_value)
+        renderer.render_q(q, print_value)

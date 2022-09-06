@@ -1,11 +1,11 @@
-from RandomAgent import RandomAgent
+from McAgent import McAgent
 
 from common.gridworld import GridWorld
 
-episodes = 1000
+episodes = 10000
 
 env = GridWorld()
-agent = RandomAgent()
+agent = McAgent()
 
 for episode in range(episodes):
     state = env.reset()
@@ -17,9 +17,9 @@ for episode in range(episodes):
 
         agent.add(state, action, reward)
         if done:
-            agent.eval()
+            agent.update()
             break
 
         state = next_state
 
-env.render_v(agent.V)
+env.render_q(agent.Q)
