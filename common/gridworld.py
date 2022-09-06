@@ -1,4 +1,4 @@
-from typing import Generator, Optional
+from typing import Generator, Optional, Tuple
 
 import numpy as np
 
@@ -57,3 +57,16 @@ class GridWorld:
         self, state: tuple[int, int], action: int, next_state: tuple[int, int]
     ) -> Optional[int]:
         return self.reward_map[next_state]
+
+    def step(self, action: int) -> Tuple[Tuple[int, int], Optional[int], bool]:
+        state = self.agent_state
+        next_state = self.next_state(state, action)
+        reward = self.reward(state, action, next_state)
+        done = next_state == self.goal_state
+
+        self.agent_state = next_state
+        return next_state, reward, done
+
+    def reset(self):
+        self.agent_state = self.start_state
+        return self.agent_state
