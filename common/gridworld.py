@@ -1,4 +1,5 @@
 from typing import Generator, Optional, Tuple
+from .gridworld_render import Renderer
 
 import numpy as np
 
@@ -70,3 +71,8 @@ class GridWorld:
     def reset(self):
         self.agent_state = self.start_state
         return self.agent_state
+
+    def render_v(self, v=None, policy=None, print_value=True):
+        renderer = Renderer(self.reward_map, self.goal_state,
+                                          self.wall_state)
+        renderer.render_v(v, policy, print_value)
